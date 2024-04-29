@@ -22,7 +22,7 @@ class Retry
             $retries,
             Request $request,
             Response $response = null,
-            RequestException $exception = null
+            ConnectException|ServerException|RequestException $exception = null
         ) use ($times) {
             // 超过最大重试次数，不再重试
             if ($retries >= $times) {
