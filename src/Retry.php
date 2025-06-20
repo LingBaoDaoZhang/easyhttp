@@ -2,6 +2,8 @@
 
 namespace yzh52521\EasyHttp;
 
+use GuzzleHttp\Exception\TooManyRedirectsException;
+use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -22,7 +24,7 @@ class Retry
             $retries,
             Request $request,
             Response $response = null,
-            ConnectException|ServerException|RequestException $exception = null
+            \Exception $exception = null
         ) use ($times) {
             // 超过最大重试次数，不再重试
             if ($retries >= $times) {
